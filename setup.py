@@ -11,6 +11,7 @@ setup(name='snak',
     install_requires=[
         'click',
     ],
+    scripts=['bin/snak'],
     test_suite='nose.collector',
     tests_require=['nose'],
 )
