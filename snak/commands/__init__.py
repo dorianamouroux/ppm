@@ -1,3 +1,3 @@
 from .init import init
 
-all = ['init']
+__all__ = ['init']

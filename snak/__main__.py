@@ -1,3 +1,3 @@
-from . import main
+from .snak import main
 
 main()

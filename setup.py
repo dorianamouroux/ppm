@@ -1,4 +1,4 @@
-from setuptools import setup
+from setuptools import setup, find_packages
 
 from snak.__version__ import version
 
@@ -9,11 +9,15 @@ setup(name='snak',
     author='Dorian Amouroux',
     author_email='dor.amouroux@gmail.com',
     license='MIT',
-    packages=['snak'],
+    packages=find_packages(exclude=["tests"]),
     install_requires=[
         'click',
     ],
-    scripts=['bin/snak'],
+    entry_points = {
+        'console_scripts': [
+            'snak=snak.snak:main'
+        ],
+    },
     test_suite='nose.collector',
     tests_require=['nose'],
 )
