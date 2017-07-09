@@ -1,7 +1,9 @@
 from setuptools import setup
 
+from snak.__version__ import version
+
 setup(name='snak',
-    version='0.1',
+    version=version,
     description='The packet manager for modern Python world',
     url='http://github.com/dorianamouroux/snak',
     author='Dorian Amouroux',
