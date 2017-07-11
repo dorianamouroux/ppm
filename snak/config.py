@@ -1,6 +1,8 @@
 import json
 import os
 
+from .utils import Singleton
+
 
 class Config(object):
 
@@ -20,7 +22,7 @@ class Config(object):
 
     def write(self, new_filename=None):
         with open(self.get_filename(new_filename), 'w') as conf_file:
-            conf_file.write(json.dumps(self.conf, indent=4, sort_keys=True))
+            conf_file.write(str(self))
 
     def set(self, key, value):
         self.conf[key] = value
@@ -28,3 +30,13 @@ class Config(object):
 
     def get(self, key, default=None):
         return self.conf.get(key, default)
+
+    def __str__(self):
+        return json.dumps(self.conf, indent=4, sort_keys=True)
+
+
+class GlobalConfig(Config, metaclass=Singleton):
+    """
+    Same as Config but globally available
+    """
+    pass

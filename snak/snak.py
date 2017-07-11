@@ -27,3 +27,11 @@ def init(*args, **kwargs):
     Create a new python project
     """
     cmd_init(*args, **kwargs)
+
+
+@main.command()
+def install():
+    """
+    Install
+    """
+    pass
