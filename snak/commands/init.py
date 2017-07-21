@@ -16,13 +16,16 @@ class Init(object):
         self.config = GlobalConfig()
         self.default = UserInput(current_folder, '1.0.0', '', '')
         if self.config.exists():
-            click.echo('{} found ! Using it for default values.'\
-                .format(self.config.get_filename()))
-            self.config.load()
-            self.default = UserInput(self.config.get('name'),
-                            self.config.get('version'),
-                            self.config.get('author'),
-                            self.config.get('description'))
+            self.import_default_from_existing_config()
+
+    def import_default_from_existing_config(self):
+        click.echo('{} found ! Using it for default values.'\
+            .format(self.config.get_filename()))
+        self.config.load()
+        self.default = UserInput(self.config.get('name'),
+                        self.config.get('version'),
+                        self.config.get('author'),
+                        self.config.get('description'))
 
     def run(self):
         user_input = self.prompt_information()
