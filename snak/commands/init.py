@@ -36,15 +36,11 @@ class Init(object):
         click.echo(conf.get_filename() + ' written !')
 
     def prompt_information(self):
-        name = click.prompt('Name',
-            default=self.default.name)
-        version = click.prompt('Version',
-            default=self.default.version)
-        author = click.prompt('Author',
-            default=self.default.author)
-        description = click.prompt('Description',
-            default=self.default.description)
-        return UserInput(name, version, author, description)
+        return UserInput(
+            click.prompt('Name', default=self.default.name),
+            click.prompt('Version', default=self.default.version),
+            click.prompt('Author', default=self.default.author),
+            click.prompt('Description', default=self.default.description))
 
     def build_conf(self, user_input):
         return self.config\
