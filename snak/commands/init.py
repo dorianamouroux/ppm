@@ -9,6 +9,7 @@ from ..config import GlobalConfig
 _, current_folder = os.path.split(os.getcwd())
 UserInput = namedtuple('UserInput', ['name', 'version', 'author', 'description'])
 
+
 class Init(object):
 
     def __init__(self):
@@ -32,10 +33,14 @@ class Init(object):
         click.echo(conf.get_filename() + ' written !')
 
     def prompt_information(self):
-        name = click.prompt('Name', default=self.default.name)
-        version = click.prompt('Version', default=self.default.version)
-        author = click.prompt('Author', default=self.default.author)
-        description = click.prompt('Description', default=self.default.description)
+        name = click.prompt('Name',
+            default=self.default.name)
+        version = click.prompt('Version',
+            default=self.default.version)
+        author = click.prompt('Author',
+            default=self.default.author)
+        description = click.prompt('Description',
+            default=self.default.description)
         return UserInput(name, version, author, description)
 
     def build_conf(self, user_input):
