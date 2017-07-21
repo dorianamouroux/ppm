@@ -1,6 +1,6 @@
 import click
 
-from .commands import init as cmd_init
+from .commands import Init
 
 
 @click.group(context_settings={'help_option_names': ['-h', '--help']})
@@ -14,7 +14,8 @@ def init(*args, **kwargs):
     """
     Create a new python project
     """
-    cmd_init(*args, **kwargs)
+    cmd = Init(*args, **kwargs)
+    cmd.run()
 
 
 @main.command()

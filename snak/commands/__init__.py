@@ -1,3 +1,3 @@
-from .init import init
+from .init import Init
 
-__all__ = ['init']
+__all__ = ['Init']

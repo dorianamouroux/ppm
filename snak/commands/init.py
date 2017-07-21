@@ -1,4 +1,5 @@
 import os
+from collections import namedtuple
 
 import click
 
@@ -6,20 +7,32 @@ from ..config import GlobalConfig
 
 
 _, current_folder = os.path.split(os.getcwd())
+UserInput = namedtuple('UserInput', ['name', 'version', 'author', 'description'])
 
+class Init(object):
 
-def init():
-    name = click.prompt('Name', default=current_folder)
-    version = click.prompt('Version', default='1.0.0')
-    author = click.prompt('Author', default='')
-    description = click.prompt('Description', default='')
-    conf = GlobalConfig()
-    conf.set('name', name)
-    conf.set('version', version)
-    conf.set('author', author)
-    conf.set('description', description)
-    conf.set('dependencies', {})
-    click.echo(conf)
-    click.confirm('Is that correct ?', default=True, abort=True)
-    conf.write()
-    click.echo(conf.get_filename() + ' written !')
+    def __init__(self):
+        self.default = UserInput(current_folder, '1.0.0', '', '')
+
+    def run(self):
+        user_input = self.prompt_information()
+        conf = self.build_conf(user_input)
+        click.echo(conf)
+        click.confirm('Is that correct ?', default=True, abort=True)
+        conf.write()
+        click.echo(conf.get_filename() + ' written !')
+
+    def prompt_information(self):
+        name = click.prompt('Name', default=self.default.name)
+        version = click.prompt('Version', default=self.default.version)
+        author = click.prompt('Author', default=self.default.author)
+        description = click.prompt('Description', default=self.default.description)
+        return UserInput(name, version, author, description)
+
+    def build_conf(self, user_input):
+        return GlobalConfig()\
+                .set('name', user_input.name)\
+                .set('version', user_input.version)\
+                .set('author', user_input.author)\
+                .set('description', user_input.description)\
+                .set('dependencies', {})
