@@ -1,10 +1,18 @@
+import os
+
 import click
 
 from ..config import GlobalConfig
 
 
-def init(name, version, author, description):
-    click.echo('init')
+_, current_folder = os.path.split(os.getcwd())
+
+
+def init():
+    name = click.prompt('Name', default=current_folder)
+    version = click.prompt('Version', default='1.0.0')
+    author = click.prompt('Author', default='')
+    description = click.prompt('Description', default='')
     conf = GlobalConfig()
     conf.set('name', name)
     conf.set('version', version)
