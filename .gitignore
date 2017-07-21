@@ -1,3 +1,6 @@
+# for now ignore snak.json
+
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
