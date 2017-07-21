@@ -20,6 +20,9 @@ class Config(object):
             self.conf = json.loads(conf_file.read())
         return self
 
+    def exists(self):
+        return os.path.isfile(self.get_filename())
+
     def write(self, new_filename=None):
         with open(self.get_filename(new_filename), 'w') as conf_file:
             conf_file.write(str(self))

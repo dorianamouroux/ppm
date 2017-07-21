@@ -12,7 +12,16 @@ UserInput = namedtuple('UserInput', ['name', 'version', 'author', 'description']
 class Init(object):
 
     def __init__(self):
+        self.config = GlobalConfig()
         self.default = UserInput(current_folder, '1.0.0', '', '')
+        if self.config.exists():
+            click.echo('{} found ! Using it for default values.'\
+                .format(self.config.get_filename()))
+            self.config.load()
+            self.default = UserInput(self.config.get('name'),
+                            self.config.get('version'),
+                            self.config.get('author'),
+                            self.config.get('description'))
 
     def run(self):
         user_input = self.prompt_information()
@@ -30,9 +39,8 @@ class Init(object):
         return UserInput(name, version, author, description)
 
     def build_conf(self, user_input):
-        return GlobalConfig()\
+        return self.config\
                 .set('name', user_input.name)\
                 .set('version', user_input.version)\
                 .set('author', user_input.author)\
-                .set('description', user_input.description)\
-                .set('dependencies', {})
+                .set('description', user_input.description)
