@@ -4,17 +4,20 @@ from .commands import Init
 
 
 @click.group(context_settings={'help_option_names': ['-h', '--help']})
-def main():
-    """Snak helps you manage your dependencies """
-    pass
+@click.option('--config', default='snak')
+@click.pass_context
+def main(ctx, config):
+    """Snak helps you manage your pip dependencies """
+    ctx.obj['CONFIG_FILE'] = config
 
 
 @main.command()
-def init(*args, **kwargs):
+@click.pass_context
+def init(ctx):
     """
     Create a new python project
     """
-    cmd = Init(*args, **kwargs)
+    cmd = Init(ctx.obj.get('CONFIG_FILE'))
     cmd.run()
 
 

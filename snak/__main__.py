@@ -1,3 +1,3 @@
 from .snak import main
 
-main()
+main(obj={})

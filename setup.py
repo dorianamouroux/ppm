@@ -15,7 +15,7 @@ setup(name='snak',
     ],
     entry_points = {
         'console_scripts': [
-            'snak=snak.snak:main'
+            'snak=snak.__main__'
         ],
     },
     test_suite='nose.collector',

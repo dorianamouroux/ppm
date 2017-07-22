@@ -12,8 +12,8 @@ UserInput = namedtuple('UserInput', ['name', 'version', 'author', 'description']
 
 class Init(object):
 
-    def __init__(self):
-        self.config = GlobalConfig()
+    def __init__(self, filename=None):
+        self.config = GlobalConfig(filename)
         self.default = UserInput(current_folder, '1.0.0', '', '')
         if self.config.exists():
             self.import_default_from_existing_config()
