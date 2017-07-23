@@ -1,6 +1,7 @@
 import click
 
 from .commands import Init
+from .commands.install import install as cmd_install
 
 
 @click.group(context_settings={'help_option_names': ['-h', '--help']})
@@ -22,8 +23,10 @@ def init(ctx):
 
 
 @main.command()
-def install():
+@click.argument('package_name', default='')
+@click.pass_context
+def install(ctx, package_name):
     """
     Install
     """
-    pass
+    cmd_install(package_name)
